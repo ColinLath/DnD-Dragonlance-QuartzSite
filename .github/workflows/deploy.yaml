@@ -3,7 +3,7 @@ name: Deploy Quartz Site from Obsidian Vault
 on:
   push:
     branches:
-      - v5
+      - main
   workflow_dispatch:
   # Optionnel : Exécuter toutes les nuits ou sur déclenchement externe
   repository_dispatch:
@@ -28,7 +28,7 @@ jobs:
           fetch-depth: 0
 
       - name: Checkout Obsidian Vault into content/
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           repository: 'ColinLath/DnD-Dragonlance-Obsidian' # <--- À MODIFIER
           token: ${{ secrets.OBSIDIAN_REPO_TOKEN }}
@@ -38,7 +38,7 @@ jobs:
         run: git fetch --unshallow || true
 
       - name: Setup Node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -62,4 +62,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4
