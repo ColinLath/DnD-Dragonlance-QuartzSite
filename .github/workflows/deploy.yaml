@@ -34,8 +34,8 @@ jobs:
           token: ${{ secrets.OBSIDIAN_REPO_TOKEN }}
           path: 'content'
 
-      - name: Fetch Quartz history
-        run: git fetch --unshallow || true
+      - name: Remove nested Git metadata
+        run: rm -rf content/.git
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -46,7 +46,7 @@ jobs:
         run: npm ci
 
       - name: Build Quartz
-        run: npx quartz build
+        run: npx quartz build --baseDir /DnD-Dragonlance-QuartzSite
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
